@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: harvest-cafeteria
+    runtime: static
+    buildCommand: echo "Sitio estático"
+    staticPublishPath: ./public
+    headers:
+      - path: /*
+        name: Content-Security-Policy
+        value: "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data:; connect-src 'self' https://TU-PROYECTO.supabase.co wss://TU-PROYECTO.supabase.co; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests"
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
