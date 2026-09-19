@@ -4,6 +4,11 @@ let db, profile, page = 'resumen', products = [];
 const pages = { superadmin: { resumen: 'Resumen', ventas: 'Ventas', productos: 'Productos', inventario: 'Inventario', proveedores: 'Proveedores', trabajadores: 'Trabajadores', sueldos: 'Sueldos', finanzas: 'Finanzas' }, cajero: { resumen: 'Mi turno', ventas: 'Registrar venta', productos: 'Stock y productos' } };
 
 async function load() {
+  const session = await db.auth.getSession();
+  if (session.data.session?.user.email?.toLowerCase() === window.HARVEST_SUPERADMIN_EMAIL?.toLowerCase()) {
+    const claim = await db.rpc('reclamar_superadmin_harvest');
+    if (claim.error && !claim.error.message.includes('ya fue asignado')) throw claim.error;
+  }
   let result = await db.from('perfiles').select('*').single(); if (result.error) throw result.error; profile = result.data;
   result = await db.from('productos').select('*').order('nombre'); if (result.error) throw result.error; products = result.data;
   $('auth').hidden = true; $('app').hidden = false; $('who').textContent = profile.nombre || profile.email; $('role-label').textContent = profile.rol.toUpperCase(); nav(); render();
