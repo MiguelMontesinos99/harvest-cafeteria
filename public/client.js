@@ -5,7 +5,7 @@ const products = [
 ].map(([id, nombre, categoria, precio, descripcion, customizable = false]) => ({ id, nombre, categoria, precio, descripcion, customizable }));
 let cart = [], filter = 'Todo', selectedProduct = null;
 const total = () => cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-const details = item => item.options ? Object.values(item.options).filter(Boolean).join(' · ') : '';
+const details = item => item.options ? Object.values(item.options).flat().filter(Boolean).join(' · ') : '';
 
 function paint() {
   const categories = ['Todo', ...new Set(products.map(product => product.categoria))];
@@ -20,14 +20,15 @@ function paintCart() {
 }
 function toast(message) { const note = $('toast'); note.textContent = `✓ ${message}`; note.hidden = false; clearTimeout(toast.timer); toast.timer = setTimeout(() => { note.hidden = true; }, 3200); }
 function addToCart(product, options = null) {
-  const adjustment = options ? (options.size === 'Grande' ? 3 : 0) + (options.milk === 'Leche vegetal' ? 2 : 0) + (options.extra === 'Shot extra' ? 2 : options.extra === 'Crema batida' ? 1.5 : 0) : 0;
+  const extras = options?.extras || [];
+  const adjustment = options ? (options.size === 'Grande' ? 3 : 0) + (options.milk === 'Leche vegetal' ? 2 : 0) + extras.reduce((sum, extra) => sum + (extra === 'Shot extra' ? 2 : extra === 'Crema batida' ? 1.5 : 0), 0) : 0;
   const key = `${product.id}-${JSON.stringify(options || {})}`, existing = cart.find(item => item.key === key);
   if (existing) existing.qty++; else cart.push({ ...product, key, qty: 1, price: product.precio + adjustment, options });
   paintCart(); toast(`${product.nombre} se añadió al carrito`);
 }
 $('filters').onclick = event => { if (event.target.dataset.category) { filter = event.target.dataset.category; paint(); } };
 $('menu').onclick = event => { const product = products.find(item => item.id === event.target.dataset.add); if (!product) return; if (!product.customizable) return addToCart(product); selectedProduct = product; $('customizer-title').textContent = product.nombre; $('customizer-price').textContent = `Desde ${money(product.precio)}`; $('customizer-form').reset(); $('customizer').showModal(); };
-$('customizer-form').onsubmit = event => { event.preventDefault(); addToCart(selectedProduct, Object.fromEntries(new FormData(event.currentTarget))); $('customizer').close(); };
+$('customizer-form').onsubmit = event => { event.preventDefault(); const form = new FormData(event.currentTarget); addToCart(selectedProduct, { temperature: form.get('temperature'), size: form.get('size'), milk: form.get('milk'), sugar: form.get('sugar'), extras: form.getAll('extras') }); $('customizer').close(); };
 $('customizer-cancel').onclick = () => $('customizer').close();
 $('cart-open').onclick = () => { $('cart').hidden = false; }; $('cart-close').onclick = () => { $('cart').hidden = true; };
 $('cart-items').onclick = event => { const item = cart.find(entry => entry.key === event.target.dataset.remove); if (!item) return; if (item.qty > 1) item.qty--; else cart = cart.filter(entry => entry !== item); paintCart(); };
