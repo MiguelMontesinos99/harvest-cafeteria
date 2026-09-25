@@ -728,7 +728,15 @@
 
         display:block;
 
+        order:1;
+
+    }
+
+    .brand {
+
         order:2;
+
+        margin-left:8px;
 
     }
 
@@ -781,6 +789,8 @@
     .cart-open {
 
         order:3;
+
+        margin-left:auto;
 
     }
 
