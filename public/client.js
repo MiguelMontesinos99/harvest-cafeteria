@@ -1,5 +1,5 @@
 const $ = id => document.getElementById(id);
-document.head.insertAdjacentHTML('beforeend', '<style>.cart[hidden]{display:none!important}</style><link rel="stylesheet" href="motion.css?v=20260924-1">');
+document.head.insertAdjacentHTML('beforeend', '<style>.cart[hidden]{display:none!important}.cart{overflow-y:auto;overscroll-behavior:contain;padding-bottom:28px}.cart #send-order{position:sticky;bottom:0;z-index:2;box-shadow:0 -12px 22px #fffdf9}.cart::-webkit-scrollbar{width:9px}.cart::-webkit-scrollbar-thumb{background:#c5ae8c;border-radius:999px}.cart::-webkit-scrollbar-track{background:transparent}</style><link rel="stylesheet" href="motion.css?v=20260924-2">');
 const money = value => `S/ ${Number(value).toFixed(2)}`;
 const products = [
   ['1', 'Café americano', 'Café', 10, 'Espresso intenso, agua caliente y el toque que tú elijas.', true], ['2', 'Flat white', 'Café', 12, 'Espresso doble y leche texturizada.', true], ['3', 'Cold brew', 'Café', 14, 'Café de extracción lenta, fresco y suave.', true], ['4', 'Panini caprese', 'Brunch', 19, 'Pan artesanal, mozzarella y pesto.'], ['5', 'Pancakes de frutos', 'Brunch', 22, 'Fruta fresca, yogurt y miel.'], ['6', 'Keke de plátano', 'Dulces', 10, 'Horneado en casa cada día.']
