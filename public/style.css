@@ -684,3 +684,106 @@
         max-width: 360px;
     }
 }
+/* ======================================
+   MENU MOVIL
+====================================== */
+
+
+.menu-toggle {
+
+    display:none;
+
+    border:0;
+
+    background:none;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    color:var(--ink);
+
+    line-height:1;
+
+    padding:8px;
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+
+
+@media(max-width:760px){
+
+
+    header {
+
+        position:sticky;
+
+    }
+
+
+
+    .menu-toggle {
+
+        display:block;
+
+        order:2;
+
+    }
+
+    .menu-toggle:focus-visible {
+
+        outline:2px solid var(--orange);
+
+        outline-offset:3px;
+
+    }
+
+
+
+    header nav {
+
+        display:none;
+
+        position:absolute;
+
+        top:78px;
+
+        left:0;
+
+        right:0;
+
+        background:#fbf8f2;
+
+        padding:25px;
+
+        border-bottom:1px solid var(--line);
+
+        flex-direction:column;
+
+        gap:18px;
+
+        z-index:20;
+
+    }
+
+
+
+    header nav.open {
+
+        display:flex;
+
+    }
+
+
+
+    .cart-open {
+
+        order:3;
+
+    }
+
+
+
+}

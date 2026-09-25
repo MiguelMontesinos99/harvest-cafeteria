@@ -53,3 +53,22 @@ if (!localStorage.getItem('harvest-cookie-consent')) {
   $('accept-cookies').onclick = () => saveConsent('accepted');
   $('essential-cookies').onclick = () => saveConsent('essential');
 }
+const menuToggle = $('menu-toggle');
+const mobileNav = $('mobile-nav');
+
+if (menuToggle && mobileNav) {
+  const setMobileMenu = isOpen => {
+    mobileNav.classList.toggle('open', isOpen);
+    menuToggle.classList.toggle('is-open', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+  };
+
+  menuToggle.addEventListener('click', () => setMobileMenu(!mobileNav.classList.contains('open')));
+  mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMobileMenu(false)));
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') setMobileMenu(false); });
+  document.addEventListener('click', event => {
+    if (mobileNav.classList.contains('open') && !event.target.closest('header')) setMobileMenu(false);
+  });
+  window.matchMedia('(min-width: 761px)').addEventListener('change', event => { if (event.matches) setMobileMenu(false); });
+}

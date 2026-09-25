@@ -45,56 +45,45 @@
 
 <header>
 
-    <!-- Logo y nombre de la cafetería -->
     <a class="brand" href="#inicio">
-        HARVEST
-        <span>COFFEE HOUSE</span>
+        HARVEST<span>COFFEE HOUSE</span>
     </a>
 
 
-    <!-- Navegación principal -->
-    <nav>
+    <button
+        class="menu-toggle"
+        id="menu-toggle"
+        type="button"
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+        aria-label="Abrir menú de navegación"
+    >
+        <span aria-hidden="true">☰</span>
+    </button>
 
-        <a href="#carta">
-            Carta
-        </a>
 
-        <a href="#reservas">
-            Reservas
-        </a>
+    <nav id="mobile-nav">
 
-        <a href="#mision-vision">
-            Nuestra esencia
-        </a>
+        <a href="#carta">Carta</a>
 
-        <a href="#galeria">
-           Galería
-        </a>
+        <a href="#reservas">Reservas</a>
 
-        <a href="#opiniones">
-            Opiniones
-        </a>
+        <a href="#mision-vision">Nuestra esencia</a>
 
-         <a href="#ubicacion">
-            Visitanos
-        </a>
-        <a href="#redes">
-        Síguenos
-        </a>
+        <a href="#galeria">Galería</a>
+
+        <a href="#opiniones">Opiniones</a>
+
+        <a href="#ubicacion">Visítanos</a>
+
+        <a href="#redes">Síguenos</a>
 
     </nav>
 
 
-    <!-- Botón que abre el carrito -->
     <button class="cart-open" id="cart-open">
-
         Pedido
-
-        <!-- Número de productos agregados -->
-        <b id="cart-count">
-            0
-        </b>
-
+        <b id="cart-count">0</b>
     </button>
 
 
