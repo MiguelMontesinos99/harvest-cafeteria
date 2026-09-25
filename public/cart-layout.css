@@ -1,0 +1,28 @@
+/* External stylesheet: compatible with the production Content Security Policy. */
+#cart[hidden], #cart [hidden] { display: none !important; }
+#cart {
+  display: flex !important;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  padding-bottom: max(18px, env(safe-area-inset-bottom));
+  animation: none;
+}
+#cart .cart-head, #cart > #send-order, #cart > small { flex: 0 0 auto; }
+#cart .cart-scroll {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: auto;
+  scrollbar-color: #a58c69 #f0e6d6;
+  padding-right: 8px;
+}
+#cart .cart-scroll::-webkit-scrollbar { width: 10px; }
+#cart .cart-scroll::-webkit-scrollbar-thumb { background: #a58c69; border-radius: 8px; }
+#cart .cart-scroll::-webkit-scrollbar-track { background: #f0e6d6; }
+#cart > #send-order { position: static; margin-top: 12px; width: 100%; }
+#cart > small { margin-top: 8px; }
