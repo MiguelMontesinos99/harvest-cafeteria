@@ -9,6 +9,9 @@
   overflow: hidden;
   padding-bottom: max(18px, env(safe-area-inset-bottom));
   animation: none;
+  transform: none !important;
+  opacity: 1 !important;
+  transition: none !important;
 }
 #cart .cart-head, #cart > #send-order, #cart > small { flex: 0 0 auto; }
 #cart .cart-scroll {
