@@ -29,3 +29,9 @@
 #cart .cart-scroll::-webkit-scrollbar-track { background: #f0e6d6; }
 #cart > #send-order { position: static; margin-top: 12px; width: 100%; }
 #cart > small { margin-top: 8px; }
+
+/* Evita que el brillo inclinado global se salga del botón y cubra el carrito. */
+#cart .button::before {
+  content: none !important;
+  display: none !important;
+}
